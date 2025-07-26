@@ -4,9 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task5_1"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800">
-    <Grid>
+        Title="Панель настроек" Height="280" Width="280">
+    <Window.Resources>
+        <Style x:Key="InteractiveButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+        <Style.Setters></Style.Setters>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsEnabled" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{StaticResource DisabledColor}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    </Window.Resources>
 
-    </Grid>
+
+    <StackPanel>
+        <TextBlock x:Name="Settings" Text="Настройки приложения" Style="{StaticResource HeaderTextStyle}"></TextBlock>
+        <Button x:Name="Save" Content="Сохранить" Style="{StaticResource InteractiveButtonStyle}"></Button>
+        <Button x:Name="Undo" Content="Отменить" Style="{StaticResource InteractiveButtonStyle}"></Button>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="ToggleButton" Grid.Column="0" Padding="5" VerticalAlignment="Center"></CheckBox>
+            <Label Content="Включить режим" Grid.Column="1" Padding="0" VerticalAlignment="Center"></Label>
+        </Grid>
+        <Button Content="Специальная кнопка"
+           Style="{StaticResource InteractiveButtonStyle}"
+           IsEnabled="{Binding IsChecked, ElementName=ToggleButton}"/>
+    </StackPanel>
 </Window>
