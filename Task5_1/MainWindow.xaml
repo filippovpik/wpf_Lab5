@@ -11,14 +11,16 @@
         <Style x:Key="InteractiveButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
         <Style.Setters></Style.Setters>
         <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True"/>
-                    <Condition Property="IsEnabled" Value="False"/>
-                </MultiTrigger.Conditions>
+            <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{StaticResource DisabledColor}"/>
-            </MultiTrigger>
-        </Style.Triggers>
+            </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource HoverColor}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
     </Style>
     </Window.Resources>
 
